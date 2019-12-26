@@ -5,6 +5,7 @@
     width: 100%;
     height: 700px;
     padding: 0;
+    overflow: hidden;
 }
 
 #slider .text {
@@ -36,19 +37,18 @@
 
 #slider .images {
     position: absolute;
-    overflow: hidden;
-    width: 100%;
-    height: 100%;
     top: 0; left: 0;
+    overflow: hidden;
+    width: 300%;
+    height: 100%;
     display: flex;
-    z-index: -1;    
+    transition: left 0.5s;
+    z-index: -1;
 }
 
 #slider .images .item {
-    top: 0;
-    left: -100%;
-    position: absolute;
-    width: 100%;
+    position: relative;
+    width: calc(100% / 3);
     height: 100%;
 }
 
@@ -67,13 +67,23 @@
 }
 
 #slider .images > .item:nth-child(1) { background: linear-gradient(135deg, #ff5eafa8, #4b7bd4a6) }
-#slider .images > .item:nth-child(1)::before { background-image: url(../images/slide1.jpg) }
+#slider .images > .item:nth-child(1)::before { 
+    background-image: url(../images/slide1.jpg);
+}
 
 #slider .images > .item:nth-child(2) { background: linear-gradient(135deg, rgba(146, 84, 196, 0.658), #3377f56e) }
-#slider .images > .item:nth-child(2)::before { background-image: url(../images/slide2.jpg) }
+#slider .images > .item:nth-child(2)::before {
+    background-image: url(../images/slide2.jpg);
+    background-size: 100% auto;
+    background-position: center;
+}
 
 #slider .images > .item:nth-child(3) { background: linear-gradient(135deg, rgba(146, 84, 196, 0.658), #3377f56e) }
-#slider .images > .item:nth-child(3)::before { background-image: url(../images/slide3.jpg) }
+#slider .images > .item:nth-child(3)::before { 
+    background-image: url(../images/slide3.jpg);
+    background-size: 100% auto;
+    background-position: center;
+}
 
 #slider .process {
     position: relative;
@@ -94,14 +104,20 @@
     cursor: pointer;
 }
 
-#slider .process .btn.active {
+#slide1:checked ~ #slider .images { left: 0; }
+#slide2:checked ~ #slider .images { left: -100%; }
+#slide3:checked ~ #slider .images { left: -200%; }
+
+#slide1:checked ~ #slider .process .btn:nth-child(1),
+#slide2:checked ~ #slider .process .btn:nth-child(2),
+#slide3:checked ~ #slider .process .btn:nth-child(3) {
     border-radius: 2px;
     transform: rotate(45deg) scale(1);
     background-color: rgb(181, 233, 61);
     transition: transform 0.7s;
 }
 
-#slider .process .btn.active:hover {
-    transform: rotate(45deg) scale(1.2);
+#slider .process .btn:hover {
+    transform: rotate(45deg) scale(1.2)!important;
     transition: transform 0.4s;
 }
