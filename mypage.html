@@ -8,9 +8,10 @@
 
     <!-- Common -->
     <link rel="stylesheet" href="css/common.css">
+    <script src="js/jquery-3.4.1.min.js"></script>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <script src="bootstrap/js/bootstrap.min.js"></script>
-
+    
     <!-- Unique -->
     <link rel="stylesheet" href="css/mypage.css">
     <link rel="stylesheet" href="css/gallery-info.css">
@@ -19,7 +20,7 @@
     <!-- 헤더 -->
     <header>
         <div class="inline d-flex justify-content-between align-items-center">
-            <a href="/">
+            <a href="index.html">
                 <img class="logo" src="images/logo.png" alt="BUSAN INTERNATIONAL ART FAIR" height="70">
             </a>
             <ul class="main-nav d-flex">
@@ -41,16 +42,16 @@
                     <a href="mypage.html">마이페이지</a>
                     <ul class="sub-nav">
                         <li><a href="mypage.html">내 정보</a></li>
-                        <li><a href="#">작업실</a></li>
+                        <li><a href="workspace.html">작업실</a></li>
                     </ul>
                 </li>
             </ul>
-            <ul class="main-nav d-flex">
+            <ul class="login-action main-nav d-flex">
                 <li>
-                    <a href="#">로그인</a>
+                    <a href="login.html">로그인</a>
                 </li>
                 <li>
-                    <a href="#">회원 가입</a>
+                    <a href="join.html">회원 가입</a>
                 </li>
             </ul>
         </div>
@@ -77,7 +78,10 @@
             </div>
             <hr>
             <div class="gallery py-4 px-2">
-                <div class="title mb-4 pl-4">내 작품 정보</div>
+                <div class="mb-4 px-4 d-flex justify-content-between">
+                    <div class="title">내 작품 정보</div>
+                    <a href="artwork_add.html" class="border-btn">작품 추가하기</a>
+                </div>
                 <div class="list stack">
                     <a href="/artwork.html" class="item">
                         <div class="image">
@@ -119,6 +123,7 @@
                     </a>
                 </div>
             </div>
+
             <hr>
             <div class="gallery py-4 px-2">
                 <div class="title mb-4 pl-4">구매 작품 정보</div>
@@ -183,6 +188,7 @@
 
     <!-- 푸터 -->
     <footer>
+
         <div class="inline">
             <div class="f-section col-md-6">
                 <div class="title">Contact Us</div>                
@@ -211,5 +217,9 @@
             </div>
         </div>
     </footer>
+
+    <!-- Common -->
+    <script src="js/database.js"></script>
+    <script src="js/LoginSession.js"></script>
 </body>
 </html>

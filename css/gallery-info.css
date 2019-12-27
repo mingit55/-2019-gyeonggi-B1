@@ -37,6 +37,10 @@
     font-weight: bold;
 }
 
+.gallery .border-btn {
+    width: 150px;
+}
+
 
 .gallery .item {
     width: 100%;
