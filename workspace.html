@@ -60,35 +60,19 @@
         <div id="tools" class="mt-5">
             <h5 class="title text-white font-weight-bold text-center">도구</h5>
             <div class="list stack mt-4">
-                <div class="tool active">펜</div>
-                <div class="tool">곡선</div>
-                <div class="tool">도형</div>
-                <div class="tool">컴퍼스</div>
-                <div class="tool">자</div>
-                <div class="tool">채우기</div>
-                <div class="tool">지우개</div>
+                <div class="tool active" data-key="pen">펜</div>
+                <div class="tool" data-key="curve">곡선</div>
+                <div class="tool" data-key="figure">도형</div>
+                <div class="tool" data-key="compass">컴퍼스</div>
+                <div class="tool" data-key="ruler">자</div>
+                <div class="tool" data-key="fill">채우기</div>
+                <div class="tool" data-key="eraser">지우개</div>
             </div>
         </div>
         <hr>
         <div id="options">
             <h5 class="title text-white font-weight-bold text-center">옵션</h5>
             <div class="list d-flex flex-column mt-4 px-3">
-                <div class="form-group">
-                    <label for="line-width">선 굵기</label>
-                    <select id="line-width" class="form-control" name="lineWidth">
-                        <option value="1">1px</option>
-                        <option value="2">2px</option>
-                        <option value="4">4px</option>
-                        <option value="8">8px</option>
-                        <option value="12">12px</option>
-                        <option value="16">16px</option>
-                        <option value="32">32px</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="line-width">색상</label>
-                    <input type="color" class="form-control" name="color">
-                </div>
             </div>
         </div>
         <div class="px-2">
@@ -99,6 +83,10 @@
     <div id="main-canvas">
     </div>
 
+    <script src="js/workspace/Pen.js"></script>
+    <script src="js/workspace/Curve.js"></script>
+    <script src="js/workspace/Figure.js"></script>
+    <script src="js/workspace/Compass.js"></script>
     <script src="js/workspace/Canvas.js"></script>
     <script src="js/workspace/App.js"></script>
 

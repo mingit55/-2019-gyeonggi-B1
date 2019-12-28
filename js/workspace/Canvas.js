@@ -5,24 +5,54 @@ class Canvas {
         this.root.width = app.width;
         this.root.height = app.height;
         this.ctx = this.root.getContext('2d');
-
         app.canvas_wrap.append(this.root);
+
+        this.lineWidth = 1;
+        this.strokeStyle = "#000";
+        this.fillStyle = "#000";
+        this.corner = 3;
+
+        this.drawList = [];
+
+        requestAnimationFrame(() => {
+            this.frame();
+        });
     }
 
-    winToOff(winX, winY){
-        let x = winX - this.root.offsetLeft;
-        let y = winY - this.root.offsetTop;
+    toCxy(e){
+        let x = e.clientX - this.root.offsetLeft;
+        let y = e.clientY - this.root.offsetTop;
         x = x < 0 ? 0 : x > this.root.width ? this.root.width : x;
-        y = y < 0 ? y : y > this.root.height ? this.root.height : y;
-
+        y = y < 0 ? 0 : y > this.root.height ? this.root.height : y;
         return {x: x, y: y};
+    }
+
+    contains(e){
+        return e.clientX >= this.root.offsetLeft 
+                && e.clientX <= this.root.offsetLeft + this.root.offsetWidth 
+                && e.clientY >= this.root.offsetTop
+                && e.clientY <= this.root.offsetTop + this.root.offsetHeight;
+    }
+
+    frame(){
+        this.render();
+        requestAnimationFrame(() => {
+            this.frame();
+        });
+    }
+
+    render(){
+        this.ctx.clearRect(0, 0, this.root.width, this.root.height);
+        this.drawList.forEach( item => {
+            item.redraw();
+        });
     }
 
     option(key, value){
         if(key === "color") {
-            this.ctx.fillStyle = value;
-            this.ctx.strokeStyle = value;
+            this.fillStyle = value;
+            this.strokeStyle = value;
         }
-        else this.ctx[key] = value;
+        else this[key] = value;
     }
 }
