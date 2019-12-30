@@ -43,7 +43,8 @@ class Canvas {
     }
 
     render(){
-        this.ctx.clearRect(0, 0, this.root.width, this.root.height);
+        this.ctx.fillStyle = "#fff";
+        this.ctx.fillRect(0, 0, this.root.width, this.root.height);
         this.drawList.forEach( item => {
             item.redraw();
         });

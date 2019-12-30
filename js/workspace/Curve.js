@@ -1,18 +1,12 @@
-class Curve {
-    constructor(app){
-        this.app = app;
+class Curve extends Tool {
+    constructor(){
+        super(...arguments);
 
         this.history = [];
         this.support = [];
         this.lineTemp = null;
         this.s_main = null;
         this.s_sub = null;
-
-        this.lineWidth = this.app.canvas.lineWidth;
-        this.strokeStyle = this.app.canvas.strokeStyle;
-
-        this.canvas = app.canvas;
-        this.ctx = this.canvas.ctx;
     }
 
 

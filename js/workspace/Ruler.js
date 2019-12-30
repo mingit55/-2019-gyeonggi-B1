@@ -1,11 +1,6 @@
-class Ruler {
-    constructor(app){
-        this.app = app;
-        this.canvas = app.canvas;
-        this.ctx = app.canvas.ctx;
-
-        this.lineWidth = this.canvas.lineWidth;
-        this.strokeStyle = this.canvas.strokeStyle;
+class Ruler extends Tool {
+    constructor(){
+        super(...arguments);
 
         this.select = null;
         this.line = null;

@@ -1,16 +1,12 @@
-class Figure {
-    constructor(app){
-        this.app = app;
-        this.canvas = app.canvas;
-        this.ctx = this.canvas.ctx;
+class Figure extends Tool {
+    constructor(){
+        super(...arguments);
         
         this.angle = 0;
         this.length = 0;
         this.cx = 0;
         this.cy = 0;
-
-        this.lineWidth = this.canvas.lineWidth;
-        this.strokeStyle = this.canvas.strokeStyle;
+        
         this.corner = this.canvas.corner;
     }
 

@@ -6,6 +6,35 @@ Math.parse360 = function(radian){
     return radian * 180 / Math.PI;
 }
 
+function hex2dec(hex){
+    hex = hex.toLowerCase();
+    if(hex < 10) return hex;
+    else if(hex === "a") return 10;
+    else if(hex === "b") return 11;
+    else if(hex === "c") return 12;
+    else if(hex === "d") return 13;
+    else if(hex === "e") return 14;
+    else if(hex === "f") return 15;
+    else return "";
+}
+
+function hex2rgb(hex){
+    hex = hex.replace("#", "");
+    if(hex.length < 6){
+        let split = hex.split("");
+        hex = split[0] + split[0] + split[1] + split[1] + split[2] + split[2];
+    }
+
+    let split = hex.split("");
+    let rgb = [];
+    rgb[0] = parseInt(hex2dec(split[0]) * 16 + hex2dec(split[1]));
+    rgb[1] = parseInt(hex2dec(split[2]) * 16 + hex2dec(split[3]));
+    rgb[2] = parseInt(hex2dec(split[4]) * 16 + hex2dec(split[5]));
+    rgb[3] = 255;
+
+    return rgb;
+}
+
 class App {
     static subColor = "#61C4EC";
 
@@ -25,6 +54,7 @@ class App {
         this.compass = () => new Compass(this);
         this.ruler = () => new Ruler(this);
         this.fill = () => new Fill(this);
+        this.eraser = () => new Eraser(this);
 
         /* Option */
         this.o_wrap = document.querySelector("#options .list");
@@ -134,6 +164,17 @@ class App {
         window.addEventListener("keydown", e => {
             if(this.action === null) return;
             if(this.action && this.action.keydown) this.action.keydown(e);
+        });
+
+
+        // 다운로드
+        document.querySelector("#download").addEventListener("click", e => {
+            let a_tag = document.createElement("a");
+            a_tag.download = "artwork.jpg";
+            a_tag.href = this.canvas.root.toDataURL("image/jpeg");
+            document.body.append(a_tag);
+            a_tag.click();
+            a_tag.remove();
         });
     }
 

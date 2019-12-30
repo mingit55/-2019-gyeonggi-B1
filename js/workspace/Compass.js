@@ -1,11 +1,6 @@
-class Compass {
-    constructor(app){
-        this.app = app;
-        this.canvas = app.canvas;
-        this.ctx = this.canvas.ctx;
-
-        this.lineWidth = this.canvas.lineWidth;
-        this.strokeStyle = this.canvas.strokeStyle;
+class Compass extends Tool {
+    constructor(){
+        super(...arguemnts);
 
         this.history = [];
 

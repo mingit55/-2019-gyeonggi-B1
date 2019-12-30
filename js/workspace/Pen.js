@@ -1,12 +1,6 @@
-class Pen {
-    constructor(app){
-        this.app = app;
-        this.canvas = app.canvas;
-        this.ctx = this.canvas.ctx;
-
-        this.lineWidth = this.canvas.lineWidth;
-        this.strokeStyle = this.canvas.strokeStyle;
-
+class Pen extends Tool {
+    constructor(){
+        super(...arguments);
         this.history = [];
     }
 
