@@ -5,6 +5,7 @@ class Canvas {
         this.root.width = app.width;
         this.root.height = app.height;
         this.ctx = this.root.getContext('2d');
+        this.ctx.lineCap = "round";
         app.canvas_wrap.append(this.root);
 
         this.lineWidth = 1;

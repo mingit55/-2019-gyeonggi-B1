@@ -1,3 +1,11 @@
+Math.distance = function(a, b){
+    return Math.sqrt(a * a + b * b);
+};
+
+Math.parse360 = function(radian){
+    return radian * 180 / Math.PI;
+}
+
 class App {
     static subColor = "#61C4EC";
 
@@ -15,6 +23,8 @@ class App {
         this.curve = () => new Curve(this);
         this.figure = () => new Figure(this);
         this.compass = () => new Compass(this);
+        this.ruler = () => new Ruler(this);
+        this.fill = () => new Fill(this);
 
         /* Option */
         this.o_wrap = document.querySelector("#options .list");
@@ -69,6 +79,7 @@ class App {
         // 툴 선택
         this.aside.querySelectorAll("#tools .tool").forEach((x, i) => {
             x.addEventListener("dblclick", e => {
+                if(this.action) return false;
                 this.type = e.target.dataset.key;
                 document.querySelector("#tools .tool.active").classList.remove("active");
                 x.classList.add("active");
@@ -103,26 +114,26 @@ class App {
 
 
         window.addEventListener("mousedown", e => {
-            if(this.action === null) {
+            if(this.action === null && this.canvas.contains(e)) {
                 this.action = this[this.type]();
                 this.canvas.drawList.push(this.action);
             }
-            if(this.action.mousedown) this.action.mousedown(e);
+            if(this.action && this.action.mousedown) this.action.mousedown(e);
         });
 
         window.addEventListener("mousemove", e => {
             if(this.action === null) return;
-            if(this.action.mousemove) this.action.mousemove(e);
+            if(this.action && this.action.mousemove) this.action.mousemove(e);
         });
 
         window.addEventListener("mouseup", e => {
             if(this.action === null) return;
-            if(this.action.mouseup) this.action.mouseup(e);
+            if(this.action && this.action.mouseup) this.action.mouseup(e);
         });
 
         window.addEventListener("keydown", e => {
             if(this.action === null) return;
-            if(this.action.keydown) this.action.keydown(e);
+            if(this.action && this.action.keydown) this.action.keydown(e);
         });
     }
 

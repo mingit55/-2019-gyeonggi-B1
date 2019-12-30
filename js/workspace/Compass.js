@@ -4,12 +4,17 @@ class Compass {
         this.canvas = app.canvas;
         this.ctx = this.canvas.ctx;
 
-        this.lineWidth = this.canvas.lienWidth;
+        this.lineWidth = this.canvas.lineWidth;
         this.strokeStyle = this.canvas.strokeStyle;
 
         this.history = [];
 
+        this.draw = null;
         this.select = null;
+    }
+
+    getAngle(y, x){
+        return (Math.atan2(y, x) + Math.PI) % (Math.PI * 2)
     }
 
     mousedown(e){
@@ -25,8 +30,15 @@ class Compass {
                 r: 0,
             };
         }
-        else {
-            
+        else if(! this.draw) {
+            this.draw = {
+                cx: this.select.cx,
+                cy: this.select.cy,
+                radius: this.select.r,
+                startAngle: this.getAngle(this.select.cy - y, this.select.cx - x),
+                endAngle: this.getAngle(this.select.cy - y, this.select.cx - x)
+            };
+            this.history.push(this.draw);
         }
     }
 
@@ -35,15 +47,43 @@ class Compass {
 
         const {x, y} = this.canvas.toCxy(e);
         
-        if( e.which === 0){
+        if( e.which === 0)
             this.select.r = Math.sqrt(Math.pow(this.select.cx - x, 2) + Math.pow(this.select.cy - y, 2));
-        }
-        else if( e.which === 1) {
+        else if( e.which === 1 && this.draw) {
+            let angle = this.getAngle(this.select.cy - y, this.select.cx - x)
+            console.log(this.draw.startAngle, this.draw.endAngle, angle);
 
+            if(this.draw.startAngle > angle) this.draw.startAngle = angle;
+            if(this.draw.endAngle < angle) this.draw.endAngle = angle;
+        }
+    }
+
+    mouseup(e){
+        const {x, y} = this.canvas.toCxy(e);
+
+        if(this.draw){
+            this.draw = null;
+        }
+    }
+
+    keydown(e) {
+        if(e.keyCode === 13) {
+            this.select = null;
+            this.draw = null;
+            this.app.unset();
         }
     }
 
     redraw(){
+        this.history.forEach(x => {
+            this.ctx.strokeStyle = this.strokeStyle;
+            this.ctx.lineWidth = this.lineWidth;
+
+            this.ctx.beginPath();
+            this.ctx.arc(x.cx, x.cy, x.radius, x.startAngle, x.endAngle);
+            this.ctx.stroke();
+        });
+
         if(this.select) {
             this.ctx.fillStyle = App.subColor;
             this.ctx.strokeStyle = App.subColor;
