@@ -1,15 +1,18 @@
 class Compass extends Tool {
     constructor(){
-        super(...arguemnts);
+        super(...arguments);
 
         this.history = [];
 
-        this.draw = null;
+        this.s_angle = 0;
         this.select = null;
+        this.draw = null;
     }
 
     getAngle(y, x){
-        return (Math.atan2(y, x) + Math.PI) % (Math.PI * 2)
+        let angle = Math.atan2(y, x) + Math.PI;
+
+        return angle;
     }
 
     mousedown(e){
@@ -26,6 +29,7 @@ class Compass extends Tool {
             };
         }
         else if(! this.draw) {
+            this.s_angle = this.getAngle(this.select.cy - y, this.select.cx - x);
             this.draw = {
                 cx: this.select.cx,
                 cy: this.select.cy,
@@ -46,7 +50,7 @@ class Compass extends Tool {
             this.select.r = Math.sqrt(Math.pow(this.select.cx - x, 2) + Math.pow(this.select.cy - y, 2));
         else if( e.which === 1 && this.draw) {
             let angle = this.getAngle(this.select.cy - y, this.select.cx - x)
-            console.log(this.draw.startAngle, this.draw.endAngle, angle);
+            console.log(Math.parse360(angle));
 
             if(this.draw.startAngle > angle) this.draw.startAngle = angle;
             if(this.draw.endAngle < angle) this.draw.endAngle = angle;

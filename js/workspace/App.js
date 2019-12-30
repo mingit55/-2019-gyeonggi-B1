@@ -6,6 +6,7 @@ Math.parse360 = function(radian){
     return radian * 180 / Math.PI;
 }
 
+
 function hex2dec(hex){
     hex = hex.toLowerCase();
     if(hex < 10) return hex;
@@ -16,6 +17,24 @@ function hex2dec(hex){
     else if(hex === "e") return 14;
     else if(hex === "f") return 15;
     else return "";
+}
+
+function prettyRGB(r, g, b, a = null){
+    let arr = [r, g, b];
+    
+    a !== null ? arr.push(a) : arr.push(255);
+    
+    let result = "rgba";
+    result += `(${arr.join(", ")})`;
+    return result;
+}
+
+function splitRGBA(rgba){
+    let regexp = /^rgba\(([0-9]{1,3}),\s([0-9]{1,3}),\s([0-9]{1,3}),\s([0-9]{1,3})\)$/g;
+    let arr = Array.from(regexp.exec(rgba));
+    arr.shift();
+    arr = arr.map(x => parseInt(x));
+    return arr;
 }
 
 function hex2rgb(hex){
@@ -59,8 +78,11 @@ class App {
         /* Option */
         this.o_wrap = document.querySelector("#options .list");
         this.o_color = document.createElem(`<div class="form-group">
-                                                <label for="line-width">색상</label>
-                                                <input type="color" class="form-control" name="color">
+                                                <label for="color">색상</label>
+                                                <div class="picker-open form-control">
+                                                    <label for="color" id="color-label"></label>
+                                                    <input type="text" hidden name="color" id="color">
+                                                </div>
                                             </div>`);
         this.o_width = document.createElem(`<div class="form-group">
                                                 <label for="line-width">굵기</label>
@@ -101,6 +123,8 @@ class App {
         this.o_wrap.append(this.o_width);
         this.o_wrap.append(this.o_color);
         this.action = null;
+
+        this.colorPicker = new ColorPicker("#color", "#color-label");
         
         this.eventTrigger();
     }
@@ -137,14 +161,14 @@ class App {
 
         // 옵션 선택
         const o_event = e => this.canvas.option(e.target.name, e.target.value);
-        this.o_color.addEventListener("change", o_event);
+        this.colorPicker.input.addEventListener("changecolor", o_event);
         this.o_width.addEventListener("change", o_event);
         this.o_corner.addEventListener("change", o_event);
         
 
 
         window.addEventListener("mousedown", e => {
-            if(this.action === null && this.canvas.contains(e)) {
+            if(this.action === null && this.canvas.contains(e, true)) {
                 this.action = this[this.type]();
                 this.canvas.drawList.push(this.action);
             }

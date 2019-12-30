@@ -7,7 +7,7 @@ class Fill extends Tool {
         // data: 한 픽셀당 4개의 인덱스로 이뤄진 배열 (r, g, b, a)
         this.imageData = this.ctx.getImageData(0, 0, this.app.width, this.app.height);
 
-        this.changeColor = hex2rgb(this.canvas.fillStyle);
+        this.changeColor = splitRGBA(this.canvas.fillStyle);
     }
 
     mousedown(e){
@@ -95,7 +95,6 @@ class Fill extends Tool {
 
     // 해당 좌표가 처음 클릭했을 때 색상과 일치하는 지 확인
     matchStart(pos){
-
         return this.imageData.data[pos] === this.startColor[0]
                 && this.imageData.data[pos + 1] === this.startColor[1]
                 && this.imageData.data[pos + 2] === this.startColor[2]

@@ -56,8 +56,8 @@ class Ruler extends Tool {
             let angle = this.select.angle;
             
 
-            // 보조선의 중앙보다 마우스의 X값이 작으면 이상하게 방향이 역전됨
-            // 이를 방지하기 위해 각도 자체를 역전 시켜 버리기로 함
+            // 보조선의 중앙보다 마우스의 X값이 작으면 방향이 역전됨
+            // 이는 Tan 함수가 2,3 사분면에서 음수가 되기 때문
             if(this.select.cx > x){
                 angle *= -1;
             }

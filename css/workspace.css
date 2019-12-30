@@ -51,6 +51,19 @@ aside hr {
     left: 0;
 }
 
+#color-label {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: #f00;
+    cursor: pointer;
+}
+
+.picker-open {
+    background-color: #fff;
+    border: 5px;
+    overflow: hidden;
+}
 
 /* 
  그림을 그릴 수 있는 영역 :: Canvas
@@ -64,4 +77,39 @@ aside hr {
     background-color: #fff;
     box-shadow: 0 0 10px 8px #00000005;
     border: 1px solid #ddd;
+}
+
+
+/*
+ 색 선택 영역 :: Color Picker
+*/
+#colorPicker {
+    width: 400px;
+    height: 300px;
+    position: fixed;
+    z-index: 100000;
+    left: 0;
+    top: 0;
+    background-color: #fff;
+    box-shadow: 0 0 10px 8px #00000010;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#colorPicker .main {
+    width: 300px;
+    height: 270px;
+    box-shadow: inset 0 0 5px 3px #00000020;
+    position: relative;
+    cursor: crosshair;
+}
+
+#colorPicker .sub, #colorPicker .opacity  {
+    width: 25px;
+    height: 270px;
+    position: relative;
+    box-shadow: inset 0 0 5px 3px #00000020;
+    cursor: crosshair;
 }

@@ -9,8 +9,8 @@ class Canvas {
         app.canvas_wrap.append(this.root);
 
         this.lineWidth = 1;
-        this.strokeStyle = "#000";
-        this.fillStyle = "#000";
+        this.strokeStyle = "rgba(0, 0, 0, 255)";
+        this.fillStyle = "rgba(0, 0, 0, 255)";
         this.corner = 3;
 
         this.drawList = [];
@@ -28,11 +28,12 @@ class Canvas {
         return {x: x, y: y};
     }
 
-    contains(e){
-        return e.clientX >= this.root.offsetLeft 
-                && e.clientX <= this.root.offsetLeft + this.root.offsetWidth 
-                && e.clientY >= this.root.offsetTop
-                && e.clientY <= this.root.offsetTop + this.root.offsetHeight;
+    contains(e, exactly = false){
+        let result = e.clientX >= this.root.offsetLeft 
+                        && e.clientX <= this.root.offsetLeft + this.root.offsetWidth 
+                        && e.clientY >= this.root.offsetTop
+                        && e.clientY <= this.root.offsetTop + this.root.offsetHeight;
+        return exactly ? e.target === this.root : result;
     }
 
     frame(){

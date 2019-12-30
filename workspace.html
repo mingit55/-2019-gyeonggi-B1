@@ -82,7 +82,23 @@
     
     <div id="main-canvas">
     </div>
+    
+    <div id="colorPicker" style="display: none;">
+        <div class="main">
+            <canvas class="picker" width="300" height="270" data-name="main" data-context="mctx"></canvas>
+        </div>
+        <div class="sub">
+            <canvas class="picker" width="25" height="270" data-name="sub" data-context="sctx"></canvas>
+        </div>
+        <div class="opacity">
+            <canvas class="picker" width="25" height="270" data-name="opacity" data-context="octx"></canvas>
+        </div>
+    </div>
 
+    <!-- 색 선택 -->
+    <script src="js/workspace/ColorPicker.js"></script>
+
+    <!-- 그리기용 코드 -->
     <script src="js/workspace/Tool.js"></script>
     <script src="js/workspace/Pen.js"></script>
     <script src="js/workspace/Curve.js"></script>
