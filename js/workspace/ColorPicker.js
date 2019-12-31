@@ -6,7 +6,7 @@ class ColorPicker {
 
         this.input.value = prettyRGB(color[0], color[1], color[2], color[3]);
         this.label.style.backgroundColor = prettyRGB(color[0], color[1], color[2]);
-        this.label.style.opacity = 100 * color[3] / 255 + "%";
+        this.label.style.opacity = color[3];
         
         this.input.dispatchEvent(ColorPicker.changecolor);
     }
@@ -15,10 +15,10 @@ class ColorPicker {
         this.open = false;
 
         this.input = document.querySelector(input);
-        this.input.value = "rgba(0, 0, 0, 255)";
+        this.input.value = "rgba(0, 0, 0, 1)";
 
         this.label = document.querySelector(label);
-        this.label.style.backgroundColor = "rgba(0, 0, 0, 255)";
+        this.label.style.backgroundColor = "rgba(0, 0, 0, 1)";
 
         this.root = document.querySelector("#colorPicker");
         this.main_canvas = this.root.querySelector(".main canvas");
@@ -122,6 +122,8 @@ class ColorPicker {
             let ctx = this[e.target.dataset.context];
             let data = Array.from(ctx.getImageData(e.offsetX, e.offsetY, 1, 1).data);
             let name = e.target.dataset.name;
+
+            data[3] = parseFloat((data[3] / 255).toFixed(2));
             
             if(name === "main") {
                 this.color = data;
@@ -131,7 +133,6 @@ class ColorPicker {
                 this.setMainColor( prettyRGB.apply(null, data) );
             }
             else if(name === "opacity"){
-                // console.log(data);
                 this.color = data;
             }
         };

@@ -64,5 +64,9 @@ class Figure extends Tool {
         this.ctx.closePath();
 
         this.ctx.stroke();
+
+        // console.log(this.fillStyle, this.strokeStyle);
+        this.ctx.fillStyle = this.fillStyle;
+        this.ctx.fill();
     }
 }

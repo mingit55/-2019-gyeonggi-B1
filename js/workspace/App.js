@@ -21,8 +21,8 @@ function hex2dec(hex){
 
 function prettyRGB(r, g, b, a = null){
     let arr = [r, g, b];
-    
-    a !== null ? arr.push(a) : arr.push(255);
+
+    a !== null ? arr.push(a) : arr.push(1);
     
     let result = "rgba";
     result += `(${arr.join(", ")})`;
@@ -49,7 +49,7 @@ function hex2rgb(hex){
     rgb[0] = parseInt(hex2dec(split[0]) * 16 + hex2dec(split[1]));
     rgb[1] = parseInt(hex2dec(split[2]) * 16 + hex2dec(split[3]));
     rgb[2] = parseInt(hex2dec(split[4]) * 16 + hex2dec(split[5]));
-    rgb[3] = 255;
+    rgb[3] = 1;
 
     return rgb;
 }

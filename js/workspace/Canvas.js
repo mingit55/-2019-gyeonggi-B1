@@ -9,8 +9,8 @@ class Canvas {
         app.canvas_wrap.append(this.root);
 
         this.lineWidth = 1;
-        this.strokeStyle = "rgba(0, 0, 0, 255)";
-        this.fillStyle = "rgba(0, 0, 0, 255)";
+        this.strokeStyle = "rgba(0, 0, 0, 1)";
+        this.fillStyle = "rgba(0, 0, 0, 1)";
         this.corner = 3;
 
         this.drawList = [];
